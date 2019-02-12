@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/TV_add_assignment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Assignment"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/ET_enter_assignment_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Name of Assignment"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/ET_points_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:ems="10"
+            android:hint="Total Points"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/BTN_enter_assignment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/styled_button_square"
+        android:layout_marginBottom="24dp"
+        android:textColor="@android:color/white"
+        android:text="Enter" />
+
+    <TextView
+        android:id="@+id/TV_assignment_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold|italic" />
+
+    <ListView
+        android:id="@+id/LV_assignment_roster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/BTN_submit_assignment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/styled_button_square"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="6dp"
+        android:textColor="@android:color/white"
+        android:text="Submit Assignment" />
+
+</LinearLayout>

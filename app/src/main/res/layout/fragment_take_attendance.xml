@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/TV_take_attendance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Take Attendance"
+        android:textAlignment="center"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp" />
+
+    <ListView
+        android:id="@+id/LV_attendence_roster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/BTN_submit_attendance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/styled_button_square"
+        android:textColor="@color/colorWhite"
+        android:text="Submit" />
+</LinearLayout>

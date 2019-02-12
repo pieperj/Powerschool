@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item
+        android:id="@+id/take_attendence"
+        android:icon="@drawable/ic_assignment_black_24dp"
+        android:title="Take Attendence"
+        />
+    <item
+        android:id="@+id/edit_roster"
+        android:icon="@drawable/ic_edit_black_24dp"
+        android:title="Edit Roster" />
+    <item
+        android:id="@+id/add_assignment"
+        android:icon="@drawable/ic_note_add_black_24dp"
+        android:title="Add Assignment" />
+
+</menu>
