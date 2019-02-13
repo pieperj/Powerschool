@@ -33,6 +33,9 @@ public class AddAssignmentFragment extends Fragment{
 
     public static final String TAG = "AddAssignmentFragment";
 
+    ArrayAdapter<Student> adapter;
+    ListView listView;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +53,8 @@ public class AddAssignmentFragment extends Fragment{
 
         assignmentNameTV = view.findViewById(R.id.TV_assignment_name);
 
-        final ListView listView = view.findViewById(R.id.LV_assignment_roster);
-        ArrayAdapter<Student> adapter = new CustomAdapter();
+        listView = view.findViewById(R.id.LV_assignment_roster);
+        adapter = new CustomAdapter();
         listView.setAdapter(adapter);
 
 
@@ -60,7 +63,7 @@ public class AddAssignmentFragment extends Fragment{
             public void onClick(View v) {
 
                 String assignmentName = enterAssignmentNameET.getText().toString();
-                int pointsTotal = Integer.parseInt(pointsTotalET.getText().toString());
+                final int pointsTotal = Integer.parseInt(pointsTotalET.getText().toString());
 
                 currentAssignment = new Assignment(assignmentName, pointsTotal);
 
@@ -70,7 +73,8 @@ public class AddAssignmentFragment extends Fragment{
                         Log.d(TAG, response.getName() + " was saved.");
                         Toast.makeText(getActivity(), "" + response.getName() + " was saved", Toast.LENGTH_SHORT).show();
 
-
+                        currentAssignment.setPointsTotal(pointsTotal);
+                        adapter.notifyDataSetChanged();
 
                         currentAssignment = null;
                     }
