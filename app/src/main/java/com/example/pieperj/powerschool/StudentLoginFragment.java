@@ -24,7 +24,7 @@ public class StudentLoginFragment extends Fragment {
 
     EditText studentEmailET, studentPasswordET, studentNameET;
     Button studentLoginBTN, studentSignUpBTN;
-    TextView studentCreateAccTV, studentLoginTitleTV;
+    TextView studentCreateAccTV, studentLoginTitleTV, studentLoginErrorTV;
 
     public static final String TAG = "StudentLoginFragment";
 
@@ -48,8 +48,9 @@ public class StudentLoginFragment extends Fragment {
 
         studentCreateAccTV = view.findViewById(R.id.TV_student_create_account);
         studentLoginTitleTV = view.findViewById(R.id.TV_student_login_title);
+        studentLoginErrorTV = view.findViewById(R.id.TV_student_login_error);
 
-
+        studentLoginErrorTV.setVisibility(View.GONE);
 
         studentLoginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +63,10 @@ public class StudentLoginFragment extends Fragment {
                     @Override
                     public void handleResponse(BackendlessUser response) {
                         Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
+
+                        studentLoginErrorTV.setVisibility(View.GONE);
+
+                        Intent intent = new Intent(getActivity(), StudentActivity.class);
                         startActivity(intent);
                         getActivity().finish();
                     }
@@ -70,20 +74,14 @@ public class StudentLoginFragment extends Fragment {
                     @Override
                     public void handleFault(BackendlessFault fault) {
                         Log.d(TAG, fault.toString());
+
+                        studentLoginErrorTV.setVisibility(View.VISIBLE);
+
                     }
                 });
 
             }
         });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -108,7 +106,7 @@ public class StudentLoginFragment extends Fragment {
                         @Override
                         public void handleResponse(BackendlessUser response) {
                             Toast.makeText(getActivity(), response.getEmail() + " was registered", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            Intent intent = new Intent(getActivity(), StudentActivity.class);
                             startActivity(intent);
                             getActivity().finish();
                         }
@@ -130,6 +128,27 @@ public class StudentLoginFragment extends Fragment {
             }
         });
 
+        studentCreateAccTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(studentCreateAccTV.getText().toString().charAt(0) == 'D') {
+                    Log.d(TAG, "switched to sign up");
+                    setSignUpView();
+                }
+
+                else if(studentCreateAccTV.getText().toString().charAt(0) == 'R') {
+                    Log.d(TAG, "switched to login");
+                    setLoginView();
+                }
+
+            }
+        });
+
+
+
+
+
 
         return view;
     }
@@ -140,7 +159,7 @@ public class StudentLoginFragment extends Fragment {
         studentSignUpBTN.setVisibility(View.GONE);
 
         studentLoginBTN.setVisibility(View.VISIBLE);
-        studentLoginTitleTV.setText("Teacher Log In");
+        studentLoginTitleTV.setText("Student Log In");
 
         studentCreateAccTV.setText("Don't have an account? Click here to sign up");
     }
@@ -150,7 +169,7 @@ public class StudentLoginFragment extends Fragment {
         studentSignUpBTN.setVisibility(View.VISIBLE);
 
         studentLoginBTN.setVisibility(View.GONE);
-        studentLoginTitleTV.setText("Teacher Sign Up");
+        studentLoginTitleTV.setText("Student Sign Up");
 
         studentCreateAccTV.setText("Return to Login");
     }

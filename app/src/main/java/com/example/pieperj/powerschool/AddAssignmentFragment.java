@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +25,8 @@ import java.util.List;
 
 public class AddAssignmentFragment extends Fragment{
 
-    private EditText enterAssignmentNameET, pointsTotalET;
-    private Button enterAssignmentBTN;
+    private EditText enterAssignmentNameET, pointsTotalET, pointsEarnedET;
+    private Button enterAssignmentBTN, submitAssignmentBTN;
     private TextView assignmentNameTV;
     private List<Assignment> assignments;
     private Assignment currentAssignment;
@@ -40,6 +41,8 @@ public class AddAssignmentFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         assignments = new ArrayList<>();
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     @Nullable
@@ -49,7 +52,10 @@ public class AddAssignmentFragment extends Fragment{
 
         enterAssignmentNameET = view.findViewById(R.id.ET_enter_assignment_name);
         pointsTotalET = view.findViewById(R.id.ET_points_total);
+        pointsEarnedET = view.findViewById(R.id.ET_assignment_points_earned);
+
         enterAssignmentBTN = view.findViewById(R.id.BTN_enter_assignment);
+        submitAssignmentBTN = view.findViewById(R.id.BTN_submit_assignment);
 
         assignmentNameTV = view.findViewById(R.id.TV_assignment_name);
 
@@ -58,7 +64,27 @@ public class AddAssignmentFragment extends Fragment{
         listView.setAdapter(adapter);
 
 
+        currentAssignment = new Assignment();
+
         enterAssignmentBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String assignmentName = enterAssignmentNameET.getText().toString();
+                int assignmentPoints = Integer.parseInt(pointsTotalET.getText().toString());
+
+                currentAssignment.setName(assignmentName);
+                currentAssignment.setPointsTotal(assignmentPoints);
+
+                assignmentNameTV.setText("" + currentAssignment);
+
+                //should change values in each row, too
+
+            }
+        });
+
+
+        submitAssignmentBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -66,6 +92,18 @@ public class AddAssignmentFragment extends Fragment{
                 final int pointsTotal = Integer.parseInt(pointsTotalET.getText().toString());
 
                 currentAssignment = new Assignment(assignmentName, pointsTotal);
+                //currentAssignment.setPointsTotal(pointsTotal);
+
+
+                int pointsEarned = Integer.parseInt(pointsEarnedET.getText().toString());
+
+                currentAssignment.setPointsEarned(pointsEarned);
+                currentAssignment.setPointsTotal(pointsTotal);
+
+
+                currentStudent.addAssignment(currentAssignment);
+
+
 
                 Backendless.Persistence.save(currentAssignment, new AsyncCallback<Assignment>() {
                     @Override
@@ -73,7 +111,7 @@ public class AddAssignmentFragment extends Fragment{
                         Log.d(TAG, response.getName() + " was saved.");
                         Toast.makeText(getActivity(), "" + response.getName() + " was saved", Toast.LENGTH_SHORT).show();
 
-                        currentAssignment.setPointsTotal(pointsTotal);
+
                         adapter.notifyDataSetChanged();
 
                         currentAssignment = null;
@@ -101,27 +139,45 @@ public class AddAssignmentFragment extends Fragment{
 
     private class CustomAdapter extends ArrayAdapter<Student> {
 
+        int[] scores;
+
         public CustomAdapter() {
             super(AddAssignmentFragment.this.getActivity(), R.layout.attendance_custom_list_item);
+            scores = new int[getCount()];
         }
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
             if(convertView == null) {
                 convertView = LayoutInflater.from(AddAssignmentFragment.this.getActivity()).inflate(R.layout.assignment_custom_list_item, parent, false);
             }
 
+            Log.d(TAG, "" + Library.getInstance().getStudents().get(position));
+
             currentStudent = Library.getInstance().getStudents().get(position);
 
-            currentAssignment = LibraryAssignment.getInstance().getLibrary()
-                                            .get(LibraryAssignment.getInstance().getLibrary().size() - 1);
+
 
 
             TextView studentNameTV = convertView.findViewById(R.id.TV_assignment_student_name);
             TextView grade = convertView.findViewById(R.id.TV_assignment_grade);
-            EditText pointsEarned = convertView.findViewById(R.id.TV_assignment_points_earned);
+
+
+            final EditText pointsEarned = convertView.findViewById(R.id.ET_assignment_points_earned);
+
+            pointsEarned.setText("" + scores[position]);
+
+            pointsEarned.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        scores[position] = Integer.parseInt(pointsEarned.getText().toString());
+                    }
+                }
+
+            });
             TextView pointsTotal = convertView.findViewById(R.id.TV_assignment_points_total);
 
 
@@ -129,7 +185,7 @@ public class AddAssignmentFragment extends Fragment{
             studentNameTV.setText("" + currentStudent.getName());
             grade.setText("" + currentStudent.getGrade() + "%");
             pointsEarned.setText("");
-            pointsTotal.setText("" + currentAssignment.getPointsTotal());
+            //pointsTotal.setText("" + currentAssignment.getPointsTotal());
 
 
             notifyDataSetChanged();
@@ -140,6 +196,7 @@ public class AddAssignmentFragment extends Fragment{
 
         @Override
         public int getCount() {
+
             return Library.getInstance().getStudents().size();
         }
 

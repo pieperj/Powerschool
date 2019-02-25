@@ -55,6 +55,8 @@
         android:text="Don't have an account? Click here to sign up"
         android:textAlignment="center" />
 
+
+
     <Button
         android:id="@+id/BTN_student_sign_up"
         android:layout_width="150dp"
@@ -63,5 +65,14 @@
         android:text="Sign Up"
         android:textSize="18sp"
         android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/TV_student_login_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ERROR: Invalid email/password"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textColor="@android:color/holo_red_dark"/>
 
 </LinearLayout>

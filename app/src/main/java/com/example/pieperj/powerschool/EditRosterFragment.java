@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,6 +40,8 @@ public class EditRosterFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
     }
 
     @Nullable
@@ -91,6 +94,7 @@ public class EditRosterFragment extends Fragment {
                     currentStudent = new Student(name, year);
                     roster.add(currentStudent);
                 }
+
                 else {
                     currentStudent.setName(name);
                 }
@@ -132,11 +136,17 @@ public class EditRosterFragment extends Fragment {
                 String name = removeStudentET.getText().toString();
 
 
+
                 for(int i = 0; i < Library.getInstance().getStudents().size(); i++) {
-                    if(Library.getInstance().getStudents().get(i).equals(name)) {
+
+
+                    if(Library.getInstance().getStudents().get(i).getName().equals(name)) {
                         currentStudent = Library.getInstance().getStudents().get(i);
+                        currentStudent.setObjectId(Backendless.Persistence.of(Student.class).find().get(i).getObjectId());
+                        //Log.d(TAG, currentStudent.getName());
                         break;
                     }
+
                 }
 
 
@@ -144,10 +154,11 @@ public class EditRosterFragment extends Fragment {
                     @Override
                     public void handleResponse(Long response) {
                         Toast.makeText(getActivity(), currentStudent.getName() + " was removed", Toast.LENGTH_SHORT).show();
+
                         removeStudentET.setText("");
                         addMessageTV.setText("" + currentStudent.getName() + "\nwas removed");
                         removeMessageTV.setText("" + currentStudent.getName() + " was removed");
-                        currentStudent = null;
+                        //currentStudent = null;
                     }
 
                     @Override

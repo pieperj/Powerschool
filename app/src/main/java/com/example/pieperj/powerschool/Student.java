@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Student {
 
-    private String name;
-    private int year, daysMissed;
+    private String name, objectId;
+    private int year, daysMissed, daysTotal;
     private double attendence, grade;
     private List<Assignment> assignments;
 
@@ -16,7 +16,28 @@ public class Student {
         this.attendence = 100;
         this.grade = 100;
         daysMissed = 0;
+        daysTotal = 0;
         assignments = new ArrayList<>();
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
+
+    public int getDaysTotal() {
+        return daysTotal;
+    }
+
+    public void setDaysTotal(int daysTotal) {
+        this.daysTotal = daysTotal;
+    }
+
+    public void addDayTotal() {
+        this.daysTotal++;
     }
 
     public Student() {
@@ -77,6 +98,10 @@ public class Student {
 
     public List<Assignment> getAssignments() {
         return assignments;
+    }
+
+    public void addAssignment(Assignment assignment) {
+        assignments.add(assignment);
     }
 
 

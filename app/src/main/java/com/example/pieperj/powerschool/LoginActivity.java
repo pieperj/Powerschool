@@ -1,6 +1,8 @@
 package com.example.pieperj.powerschool;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,9 +19,8 @@ import com.backendless.exceptions.BackendlessFault;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText emailET, passwordET, nameET;
-    Button loginBTN, signUpBTN;
-    TextView createAccTV, loginTitleTV;
+    Button studentSignInBTN, teacherSignInBTN;
+    TextView powerschoolTitleTV;
 
     public static final String SECRET_KEY = "78E7D8B8-680F-4D09-FFC7-6AC17BEB5F00";
     public static final String APPLICATION_ID = "F0CA8104-2530-FAB7-FF28-6E99A247EB00";
@@ -33,81 +34,47 @@ public class LoginActivity extends AppCompatActivity {
 
         Backendless.initApp(this, APPLICATION_ID, SECRET_KEY);
 
+        studentSignInBTN = findViewById(R.id.student_login);
+        teacherSignInBTN = findViewById(R.id.teacher_login);
+        powerschoolTitleTV = findViewById(R.id.powerschool_login);
 
-        emailET = findViewById(R.id.ET_email);
-        passwordET = findViewById(R.id.ET_password);
-        nameET = findViewById(R.id.ET_login_name);
+        studentSignInBTN.setVisibility(View.VISIBLE);
+        teacherSignInBTN.setVisibility(View.VISIBLE);
+        powerschoolTitleTV.setVisibility(View.VISIBLE);
 
-        loginBTN = findViewById(R.id.BTN_log_in);
-        signUpBTN = findViewById(R.id.BTN_sign_up);
 
-        createAccTV = findViewById(R.id.TV_create_account);
-        loginTitleTV = findViewById(R.id.TV_login_title);
 
-        loginBTN.setOnClickListener(new View.OnClickListener() {
+        studentSignInBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fragment fragment = null;
 
-                String email = emailET.getText().toString();
-                String password = passwordET.getText().toString();
+                fragment = new StudentLoginFragment();
 
-                Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
-                    @Override
-                    public void handleResponse(BackendlessUser response) {
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        LoginActivity.this.finish();
-                    }
+                studentSignInBTN.setVisibility(View.GONE);
+                teacherSignInBTN.setVisibility(View.GONE);
+                powerschoolTitleTV.setVisibility(View.GONE);
 
-                    @Override
-                    public void handleFault(BackendlessFault fault) {
-                        Log.d(TAG, fault.toString());
-                    }
-                });
-
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.login_fragment_container, fragment);
+                ft.commit();
             }
         });
 
-        signUpBTN.setOnClickListener(new View.OnClickListener() {
+        teacherSignInBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fragment fragment = null;
 
-                String email = emailET.getText().toString();
-                String password = passwordET.getText().toString();
-                String name = nameET.getText().toString();
+                fragment = new TeacherLoginFragment();
 
-                if(!email.isEmpty() && !password.isEmpty() && !name.isEmpty() && email.contains("@") ) {
+                studentSignInBTN.setVisibility(View.GONE);
+                teacherSignInBTN.setVisibility(View.GONE);
+                powerschoolTitleTV.setVisibility(View.GONE);
 
-                    BackendlessUser user = new BackendlessUser();
-                    user.setEmail(email);
-                    user.setPassword(password);
-                    user.setProperty("name", name);
-
-                    Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
-                        @Override
-                        public void handleResponse(BackendlessUser response) {
-                            Toast.makeText(LoginActivity.this,
-                                    response.getEmail() + " was registered", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            LoginActivity.this.finish();
-                        }
-
-                        @Override
-                        public void handleFault(BackendlessFault fault) {
-                            Log.d(TAG, fault.toString());
-                        }
-                    });
-
-                    emailET.setText("");
-                    passwordET.setText("");
-                    nameET.setText("");
-
-                    setLoginView();
-
-                }
-
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.login_fragment_container, fragment);
+                ft.commit();
             }
         });
 
@@ -116,29 +83,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        createAccTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                if(createAccTV.getText().toString().charAt(0) == 'D') {
-                    Log.d(TAG, "switched to sign up");
-                    setSignUpView();
-                }
 
-                else if(createAccTV.getText().toString().charAt(0) == 'R') {
-                    Log.d(TAG, "switched to login");
-                    setLoginView();
-                }
-
-            }
-        });
 
 
 
     }
 
 
-
+    /*
     public void setLoginView() {
         nameET.setVisibility(View.GONE);
         signUpBTN.setVisibility(View.GONE);
@@ -158,6 +111,6 @@ public class LoginActivity extends AppCompatActivity {
 
         createAccTV.setText("Return to Login");
     }
-
+    */
 
 }
