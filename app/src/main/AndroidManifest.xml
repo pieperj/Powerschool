@@ -22,13 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".MainActivity" />
         <activity
-            android:name=".MainActivity"
-
-            />
-
-        <activity android:name=".StudentActivity"></activity>
+            android:name=".StudentActivity"
+            android:label="@string/title_activity_student"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

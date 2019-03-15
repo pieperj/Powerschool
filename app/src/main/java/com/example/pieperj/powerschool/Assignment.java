@@ -5,8 +5,9 @@ public class Assignment {
     private String name;
     private int pointsTotal, pointsEarned;
 
-    public Assignment(String name, int pointsTotal) {
+    public Assignment(String name, int pointsEarned, int pointsTotal) {
         this.name = name;
+        this.pointsEarned = pointsEarned;
         this.pointsTotal = pointsTotal;
     }
 

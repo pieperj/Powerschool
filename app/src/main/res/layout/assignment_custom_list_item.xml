@@ -13,6 +13,7 @@
         android:layout_marginTop="16dp"
         android:text="Name"
         android:textColor="@android:color/black"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,20 +25,25 @@
         android:layout_marginTop="16dp"
         android:text="00.00%"
         android:textColor="@android:color/black"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/TV_assignment_student_name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/ET_assignment_points_earned"
-        android:layout_width="66dp"
-        android:layout_height="53dp"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:ems="10"
+        android:hint="0"
+
         android:inputType="textPersonName"
         android:textSize="11sp"
-
         app:layout_constraintEnd_toStartOf="@+id/TV_assignment_points_total"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/TV_assignment_grade"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

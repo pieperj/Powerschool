@@ -2,6 +2,7 @@ package com.example.pieperj.powerschool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Student {
 
@@ -18,6 +19,41 @@ public class Student {
         daysMissed = 0;
         daysTotal = 0;
         assignments = new ArrayList<>();
+    }
+
+    private int getTotalPointsPossible() {
+        int total = 0;
+        for(Assignment a : assignments) {
+            total += a.getPointsTotal();
+        }
+        return total;
+    }
+
+    private int getTotalPointsEarned() {
+        int total = 0;
+        for(Assignment a : assignments) {
+            total += a.getPointsEarned();
+        }
+        return total;
+    }
+
+    public void calcTotalGrade() {
+
+        int totalAssignments = 0;
+        double scores = 0;
+
+        for(int i = 0; i < assignments.size(); i++) {
+            totalAssignments++;
+            int pointsPossible = assignments.get(i).getPointsTotal();
+            int pointsEarned = assignments.get(i).getPointsEarned();
+
+            double score = (double)pointsEarned / (double)pointsPossible;
+            scores += score;
+
+        }
+
+        this.grade = scores / (double)totalAssignments;
+
     }
 
     public String getObjectId() {
@@ -83,7 +119,6 @@ public class Student {
         this.grade = grade;
     }
 
-
     public int getDaysMissed() {
         return daysMissed;
     }
@@ -108,9 +143,14 @@ public class Student {
     public void setAssignments(List<Assignment> assignments) {
         this.assignments = assignments;
     }
-
+    /*
     public String toString() {
         return String.format("%s, Year %d - %.2f | Grade: %f", name, year, attendence, grade);
+    }
+    */
+
+    public String toString(){
+        return String.format(Locale.US, "%s : %d / %d", name, getTotalPointsEarned(), getTotalPointsPossible());
     }
 
 }

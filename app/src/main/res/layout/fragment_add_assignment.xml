@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
 <LinearLayout
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/TV_add_assignment"
@@ -62,27 +60,20 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold|italic" />
-
-
-    <ListView
-        android:id="@+id/LV_assignment_roster"
+    <!--
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:descendantFocusability="afterDescendants" />
-
-    <Button
-        android:id="@+id/BTN_submit_assignment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@layout/styled_button_square"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="6dp"
-        android:textColor="@android:color/white"
-        android:text="Submit Assignment" />
-
+        android:layout_height="match_parent">
+        -->
+        <ListView
+            android:id="@+id/LV_assignment_roster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+<!--
+    </ScrollView>
+-->
 
 
 </LinearLayout>
 
-</ScrollView>
 
