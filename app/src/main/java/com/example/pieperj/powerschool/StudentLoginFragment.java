@@ -1,16 +1,16 @@
 package com.example.pieperj.powerschool;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +25,7 @@ public class StudentLoginFragment extends Fragment {
     EditText studentEmailET, studentPasswordET, studentNameET;
     Button studentLoginBTN, studentSignUpBTN;
     TextView studentCreateAccTV, studentLoginTitleTV, studentLoginErrorTV;
+    ImageView returnHomeIV;
 
     public static final String TAG = "StudentLoginFragment";
 
@@ -50,7 +51,23 @@ public class StudentLoginFragment extends Fragment {
         studentLoginTitleTV = view.findViewById(R.id.TV_student_login_title);
         studentLoginErrorTV = view.findViewById(R.id.TV_student_login_error);
 
+        returnHomeIV = view.findViewById(R.id.IV_student_return_button);
+
         studentLoginErrorTV.setVisibility(View.GONE);
+
+
+
+        returnHomeIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Fragment fragment = null;
+//                fragment =
+//
+//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//                ft.replace(R.id.login_fragment_container, fragment);
+            }
+        });
+
 
         studentLoginBTN.setOnClickListener(new View.OnClickListener() {
             @Override

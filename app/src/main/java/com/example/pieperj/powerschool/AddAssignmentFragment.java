@@ -2,10 +2,10 @@ package com.example.pieperj.powerschool;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,13 +13,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
@@ -29,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class AddAssignmentFragment extends Fragment{
+public class AddAssignmentFragment extends Fragment {
 
     private EditText enterAssignmentNameET, pointsTotalET, pointsEarnedET;
     private Button enterAssignmentBTN, submitAssignmentBTN;
@@ -49,6 +47,8 @@ public class AddAssignmentFragment extends Fragment{
         for(int i = 0; i < Library.getInstance().getStudents().size(); i++) {
             assignments.add(new Assignment("", 0, 0));
         }
+
+
     }
 
     @Override
