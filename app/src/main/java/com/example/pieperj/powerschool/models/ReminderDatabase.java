@@ -32,8 +32,7 @@ public class ReminderDatabase {
 
     public AppDatabase getDatabase(Context context){
         if(database == null){
-            database = Room.databaseBuilder(context, AppDatabase.class,
-                    "reminder").build();
+            database = Room.databaseBuilder(context, AppDatabase.class, "reminder").build();
         }
 
         return database;

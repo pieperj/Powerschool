@@ -72,7 +72,7 @@ public class SetReminderFragment extends Fragment implements DatabaseStorageCall
         setTimeBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment fragment = new DatePickerDialogFragment();
+                DialogFragment fragment = new TimePickerDialogFragment();
                 fragment.show(getActivity().getSupportFragmentManager(), "timePicker");
             }
         });
@@ -88,7 +88,8 @@ public class SetReminderFragment extends Fragment implements DatabaseStorageCall
 
                 NotificationHelper.scheduleReminder(getActivity(), reminder);
                 NotificationHelper.createNotificationChannel(getActivity());
-                //new SaveReminderTask(getActivity(), getActivity()).execute(reminder);
+                new SaveReminderTask(getActivity(), SetReminderFragment.this).execute(reminder);
+
 
 
             }
