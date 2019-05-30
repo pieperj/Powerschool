@@ -87,7 +87,7 @@ public class TakeAttendanceFragment extends Fragment {
 
                     adapter.notifyDataSetChanged();
 
-                    
+
 
                         /***/
                         //student.setAttendence((double)(student.getDaysTotal() - student.getDaysAttended())/(student.getDaysTotal()));
