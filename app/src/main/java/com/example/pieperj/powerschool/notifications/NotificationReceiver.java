@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.pieperj.powerschool.StudentActivity;
+import com.example.pieperj.powerschool.activities.StudentActivity;
 import com.example.pieperj.powerschool.models.DatabaseRetrievalCallback;
 import com.example.pieperj.powerschool.tasks.GetRemindersTask;
 import com.example.pieperj.powerschool.R;

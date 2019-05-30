@@ -1,18 +1,19 @@
-package com.example.pieperj.powerschool;
+package com.example.pieperj.powerschool.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
+import com.example.pieperj.powerschool.fragments.HelpFragment;
+import com.example.pieperj.powerschool.R;
+import com.example.pieperj.powerschool.fragments.SetReminderFragment;
 import com.example.pieperj.powerschool.models.DatabaseStorageCallback;
 import com.example.pieperj.powerschool.models.Reminder;
 import com.example.pieperj.powerschool.models.ReminderDatabase;
-import com.example.pieperj.powerschool.views.DatePickerDialogFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import android.view.View;
+
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -32,6 +35,8 @@ public class StudentActivity extends AppCompatActivity
 
     private Calendar cal;
 
+    private Button viewGradesBTN, helpBTN, setReminderBTN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,52 @@ public class StudentActivity extends AppCompatActivity
 
 
         cal = Calendar.getInstance();
+
+        viewGradesBTN = findViewById(R.id.BTN_student_view_grades);
+        helpBTN = findViewById(R.id.BTN_student_help);
+        setReminderBTN = findViewById(R.id.BTN_student_set_reminder);
+
+
+        viewGradesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+            }
+        });
+
+        helpBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new HelpFragment();
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.student_fragment_container, fragment);
+                ft.commit();
+
+                viewGradesBTN.setVisibility(View.GONE);
+                helpBTN.setVisibility(View.GONE);
+                setReminderBTN.setVisibility(View.GONE);
+
+            }
+        });
+
+        setReminderBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new SetReminderFragment();
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.student_fragment_container, fragment);
+                ft.commit();
+
+                viewGradesBTN.setVisibility(View.GONE);
+                helpBTN.setVisibility(View.GONE);
+                setReminderBTN.setVisibility(View.GONE);
+            }
+        });
 
 
         /*
@@ -118,9 +169,15 @@ public class StudentActivity extends AppCompatActivity
             fragment = new SetReminderFragment();
         }
 
+        viewGradesBTN.setVisibility(View.GONE);
+        helpBTN.setVisibility(View.GONE);
+        setReminderBTN.setVisibility(View.GONE);
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.student_fragment_container, fragment);
         ft.commit();
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

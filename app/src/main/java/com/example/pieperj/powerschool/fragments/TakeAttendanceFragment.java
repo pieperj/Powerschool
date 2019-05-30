@@ -1,4 +1,4 @@
-package com.example.pieperj.powerschool;
+package com.example.pieperj.powerschool.fragments;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -17,6 +17,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.pieperj.powerschool.Library;
+import com.example.pieperj.powerschool.R;
+import com.example.pieperj.powerschool.Student;
 
 public class TakeAttendanceFragment extends Fragment {
 
@@ -63,24 +67,43 @@ public class TakeAttendanceFragment extends Fragment {
                     Student student = Library.getInstance().getStudents().get(i);
                     student.addDayTotal();
 
-                    if(cb.isChecked() == false) {
+                    if(cb.isChecked()) {
 
-                        student.addDayMissed();
+                        student.addDayAttended();
+
+                    }
+
+                    Log.i(TAG, "" + student.getName());
+
+                    Log.i(TAG, "Total Days: " + student.getDaysTotal());
+
+
+                    Log.i(TAG, "Days Attended: " + student.getDaysAttended());
+
+                    student.setAttendence((double)student.getDaysAttended() / (double)student.getDaysTotal() * 100);
+
+                    Log.i(TAG, "Attendence: " + student.getAttendence() + "\n");
+
+
+                    adapter.notifyDataSetChanged();
+
+                    
 
                         /***/
-                        student.setAttendence((double)(student.getDaysTotal() - student.getDaysMissed())/(student.getDaysTotal()));
+                        //student.setAttendence((double)(student.getDaysTotal() - student.getDaysAttended())/(student.getDaysTotal()));
 
+                    /*
                         int totalDays = Library.getInstance().getTotalDays();
                         Log.d(TAG, "Total Days" + totalDays);
 
-                        int daysAttended = totalDays - student.getDaysMissed();
+                        int daysAttended = totalDays - student.getDaysAttended();
                         Log.d(TAG, "Days Attended" + daysAttended);
 
                         // NOT WORKING
-                        student.setAttendence(((student.getAttendence() + ((double)daysAttended / (double)totalDays)) / 2));
+                        // student.setAttendence(((student.getAttendence() + ((double)daysAttended / (double)totalDays)) / 2));
 
                         adapter.notifyDataSetChanged();
-                    }
+                    */
 
 
                 }

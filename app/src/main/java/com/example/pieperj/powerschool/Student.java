@@ -7,7 +7,9 @@ import java.util.Locale;
 public class Student {
 
     private String name, objectId;
-    private int year, daysMissed, daysTotal;
+
+    private int year, daysAttended, daysTotal;
+
     private double attendence, grade;
     private List<Assignment> assignments;
 
@@ -16,7 +18,7 @@ public class Student {
         this.year = year;
         this.attendence = 100;
         this.grade = 100;
-        daysMissed = 0;
+        daysAttended = 0;
         daysTotal = 0;
         assignments = new ArrayList<>();
     }
@@ -81,7 +83,7 @@ public class Student {
         this.year = 9;
         this.attendence = 100.00;
         this.grade  = 100.00;
-        daysMissed = 0;
+        daysAttended = 0;
         assignments = new ArrayList<>();
     }
 
@@ -119,16 +121,16 @@ public class Student {
         this.grade = grade;
     }
 
-    public int getDaysMissed() {
-        return daysMissed;
+    public int getDaysAttended() {
+        return daysAttended;
     }
 
-    public void setDaysMissed(int days) {
-        this.daysMissed = days;
+    public void setDaysAttended(int days) {
+        this.daysAttended = days;
     }
 
-    public void addDayMissed() {
-        daysMissed++;
+    public void addDayAttended() {
+        daysAttended++;
     }
 
     public List<Assignment> getAssignments() {

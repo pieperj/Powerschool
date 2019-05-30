@@ -12,8 +12,11 @@
     <color name="colorPrimary">#01579b</color>
     <color name="colorPrimaryDark">#002f6c</color>
     <color name="colorPrimaryLight">#4f83cc</color>
+    <!--
     <color name="colorAccent">#43a047</color>
+    -->
 
+    <color name="colorAccent">#4f83cc</color>
 
     <color name="colorSecondary">#43a047</color>
     <color name="colorSecondaryDark">#00701a</color>
@@ -23,5 +26,7 @@
     <color name='colorWhite'>#ffffff</color>
 
     <color name="colorListBackground">#FFFFFF</color>
+
+
 
 </resources>

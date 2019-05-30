@@ -6,11 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity"
+    android:background="@drawable/background_gradient_gray">
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/IV_powerschool_logo_home"
         android:layout_width="265dp"
         android:layout_height="265dp"
         android:layout_marginStart="8dp"
@@ -38,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/IV_powerschool_logo_home" />
 
     <Button
         android:id="@+id/teacher_login"
@@ -56,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toEndOf="@+id/student_login"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/IV_powerschool_logo_home" />
 
     <TextView
         android:id="@+id/powerschool_login"

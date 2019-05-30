@@ -1,4 +1,4 @@
-package com.example.pieperj.powerschool;
+package com.example.pieperj.powerschool.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,6 +22,10 @@ import android.widget.TextView;
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.example.pieperj.powerschool.Assignment;
+import com.example.pieperj.powerschool.Library;
+import com.example.pieperj.powerschool.R;
+import com.example.pieperj.powerschool.Student;
 
 import java.util.ArrayList;
 import java.util.List;

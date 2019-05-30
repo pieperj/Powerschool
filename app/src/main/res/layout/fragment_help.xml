@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HelpFragment">
+    tools:context=".fragments.HelpFragment">
 
 
     <TextView
@@ -53,5 +53,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Send Email" />
+
+    <Button
+        android:id="@+id/BTN_drop_out"
+        android:layout_width="261dp"
+        android:layout_height="121dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/rubik_mono_one"
+        android:background="@layout/drop_out_button"
+        android:text="DROP OUT"
+        android:textSize="24sp" />
 
 </LinearLayout>

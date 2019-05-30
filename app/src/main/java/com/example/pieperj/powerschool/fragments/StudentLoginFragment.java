@@ -1,4 +1,4 @@
-package com.example.pieperj.powerschool;
+package com.example.pieperj.powerschool.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,13 +18,15 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.example.pieperj.powerschool.R;
+import com.example.pieperj.powerschool.activities.StudentActivity;
 
 
 public class StudentLoginFragment extends Fragment {
 
     EditText studentEmailET, studentPasswordET, studentNameET;
     Button studentLoginBTN, studentSignUpBTN;
-    TextView studentCreateAccTV, studentLoginTitleTV, studentLoginErrorTV;
+    TextView studentCreateAccTV, studentLoginTitleTV, studentNameTV, studentLoginErrorTV;
     ImageView returnHomeIV;
 
     public static final String TAG = "StudentLoginFragment";
@@ -50,6 +52,7 @@ public class StudentLoginFragment extends Fragment {
         studentCreateAccTV = view.findViewById(R.id.TV_student_create_account);
         studentLoginTitleTV = view.findViewById(R.id.TV_student_login_title);
         studentLoginErrorTV = view.findViewById(R.id.TV_student_login_error);
+        studentNameTV = view.findViewById(R.id.TV_student_name);
 
         returnHomeIV = view.findViewById(R.id.IV_student_return_button);
 
@@ -173,6 +176,7 @@ public class StudentLoginFragment extends Fragment {
 
     public void setLoginView() {
         studentNameET.setVisibility(View.GONE);
+        studentNameTV.setVisibility(View.GONE);
         studentSignUpBTN.setVisibility(View.GONE);
 
         studentLoginBTN.setVisibility(View.VISIBLE);
@@ -183,6 +187,7 @@ public class StudentLoginFragment extends Fragment {
 
     public void setSignUpView() {
         studentNameET.setVisibility(View.VISIBLE);
+        studentNameTV.setVisibility(View.VISIBLE);
         studentSignUpBTN.setVisibility(View.VISIBLE);
 
         studentLoginBTN.setVisibility(View.GONE);

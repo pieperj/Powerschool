@@ -1,4 +1,4 @@
-package com.example.pieperj.powerschool;
+package com.example.pieperj.powerschool.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +20,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.example.pieperj.powerschool.R;
 import com.example.pieperj.powerschool.models.DatabaseStorageCallback;
+import com.example.pieperj.powerschool.models.RecyclerListAdapter;
 import com.example.pieperj.powerschool.models.Reminder;
 import com.example.pieperj.powerschool.models.ReminderDatabase;
 import com.example.pieperj.powerschool.notifications.NotificationHelper;
@@ -26,7 +31,6 @@ import com.example.pieperj.powerschool.views.DatePickerDialogFragment;
 import com.example.pieperj.powerschool.views.TimePickerDialogFragment;
 
 import java.util.Calendar;
-import java.util.Set;
 
 public class SetReminderFragment extends Fragment implements DatabaseStorageCallback, DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener {
@@ -35,6 +39,9 @@ public class SetReminderFragment extends Fragment implements DatabaseStorageCall
     private EditText reminderTitleET, reminderDescriptionET;
     private Button setTimeBTN, setDateBTN, saveReminderBTN;
     private Calendar cal;
+
+    private RecyclerView recyclerView;
+    private RecyclerListAdapter adapter = new RecyclerListAdapter();
 
     public SetReminderFragment() {
 
@@ -58,6 +65,13 @@ public class SetReminderFragment extends Fragment implements DatabaseStorageCall
         setDateBTN = view.findViewById(R.id.BTN_set_reminder_date);
         setTimeBTN = view.findViewById(R.id.BTN_set_reminder_time);
         saveReminderBTN = view.findViewById(R.id.BTN_save_reminder);
+
+        recyclerView = view.findViewById(R.id.rv_notifications);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+
+
+        DividerItemDecoration decoration = new DividerItemDecoration(getActivity(), RecyclerView.VERTICAL);
+        recyclerView.addItemDecoration(decoration);
 
 
         setDateBTN.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +108,8 @@ public class SetReminderFragment extends Fragment implements DatabaseStorageCall
 
             }
         });
+
+        //new GetRemindersTask(getActivity(), SetReminderFragment.this, false).execute();
 
         return view;
     }

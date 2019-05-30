@@ -1,10 +1,15 @@
-package com.example.pieperj.powerschool;
+package com.example.pieperj.powerschool.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.pieperj.powerschool.fragments.AddAssignmentFragment;
+import com.example.pieperj.powerschool.fragments.EditRosterFragment;
+import com.example.pieperj.powerschool.R;
+import com.example.pieperj.powerschool.fragments.TakeAttendanceFragment;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
