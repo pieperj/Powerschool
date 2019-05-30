@@ -17,7 +17,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
 import com.example.pieperj.powerschool.Library;
 import com.example.pieperj.powerschool.R;
 import com.example.pieperj.powerschool.Student;
@@ -87,27 +91,23 @@ public class TakeAttendanceFragment extends Fragment {
 
                     adapter.notifyDataSetChanged();
 
+                    //Backendless.Persistence.of(Student.class).findById(student.getObjectId()).setAttendence(student.getAttendence());
 
+                    //Backendless.Persistence.of(Student.class).find().get(i).setAttendence(student.getAttendence());
+                    Backendless.Persistence.of(Student.class).save(student, new AsyncCallback<Student>() {
+                        @Override
+                        public void handleResponse(Student response) {
+                            Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+                        }
 
-                        /***/
-                        //student.setAttendence((double)(student.getDaysTotal() - student.getDaysAttended())/(student.getDaysTotal()));
-
-                    /*
-                        int totalDays = Library.getInstance().getTotalDays();
-                        Log.d(TAG, "Total Days" + totalDays);
-
-                        int daysAttended = totalDays - student.getDaysAttended();
-                        Log.d(TAG, "Days Attended" + daysAttended);
-
-                        // NOT WORKING
-                        // student.setAttendence(((student.getAttendence() + ((double)daysAttended / (double)totalDays)) / 2));
-
-                        adapter.notifyDataSetChanged();
-                    */
+                        @Override
+                        public void handleFault(BackendlessFault fault) {
+                            Log.e(TAG, "failed to saved");
+                        }
+                    });
 
 
                 }
-
 
 
             }
